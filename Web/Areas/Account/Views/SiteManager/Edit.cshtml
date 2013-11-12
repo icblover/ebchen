@@ -1,0 +1,63 @@
+﻿@model ZCJ.Model.SiteManager
+@{
+    ViewBag.Title = "修改管理员信息";
+}
+
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.UserName)
+            </td>
+            <td class="paddingleft">
+                <input id="UserName" type="text" name="UserName"  value="@Model.UserName"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.PassWord)
+            </td>
+            <td class="paddingleft">
+                <input id="OldPassWord" type="text" name="OldPassWord" />
+                <input id="PassWord" type="hidden" name="PassWord" value="@Model.PassWord"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">新密码</td>
+            <td class="paddingleft">
+                <input id="NewPassWord" type="text" name="NewPassWord" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.NickName)
+            </td>
+            <td class="paddingleft">
+                <input type="text" id="NickName" name="NickName" value="@Model.NickName"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Role)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("role", ZCJ.BLL.ManagerRoleBLL.GetManagerRoleList(), new { select = Model.id })
+                @Html.ValidationMessageFor(m => m.Role)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingleft">@Html.DisplayNameFor(m => m.Is_Deleted)</td>
+            <td class="paddingleft">
+                <input type="checkbox" checked="checked" name="Is_Deleted" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+                <input type="hidden" value="@Model.id" id="id" name="id"/>
+            </td>
+        </tr>
+    </table>
+}

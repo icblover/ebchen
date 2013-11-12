@@ -1,0 +1,46 @@
+﻿@model ZCJ.Model.SiteBaseInfo
+@{
+    ViewBag.Title = "系统配置信息";
+}
+
+<table class="table_all table-hover">
+    <tr>
+        <td>网站名称</td>
+        <td class="paddingleft">
+            @Model.SiteName
+        </td>
+    </tr>
+    <tr>
+        <td>网站关键字</td>
+        <td class="paddingleft">@Model.SiteKeyWord</td>
+    </tr>
+    <tr>
+        <td>联系方式</td>
+        <td class="paddingleft">@Model.TelNo</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td class="paddingleft">@Model.Email</td>
+    </tr>
+    <tr>
+        <td>邮编</td>
+        <td class="paddingleft">@Model.ZipCode</td>
+    </tr>
+    <tr>
+        <td>版权信息</td>
+        <td class="paddingleft">@Model.Copyright</td>
+    </tr>
+    <tr>
+        <td>公司地址</td>
+        <td class="paddingleft">@Model.Address</td>
+    </tr>
+    <tr>
+        <td>统计代码</td>
+        <td class="paddingleft">@Model.CodeStatistics.Replace("<","&lg").Replace(">","&gt")</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            @Html.ActionLink("修改网站配置信息", "Edit", "SiteInfo")
+        </td>
+    </tr>
+</table>

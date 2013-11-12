@@ -1,0 +1,76 @@
+﻿@model ZCJ.Model.FriendLink
+@{
+    ViewBag.Title = "修改友情链接信息";
+}
+@section Scripts
+{
+    <script src="~/Areas/Account/Scripts/Validate.js"></script>
+}
+@using (Html.BeginForm("Edit", "FriendLink", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.LinkType)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("LinkType", ZCJ.BLL.FriendLinkBLL.GetFriendLinkTypeList(), new { select = Model.LinkType })
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.LinkName)
+            </td>
+            <td class="paddingleft middle">
+                @Html.EditorFor(m => m.LinkName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright middle">
+                @Html.DisplayNameFor(m => m.LinkUrl)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.LinkUrl)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.LinkLogo)
+            </td>
+            <td class="paddingleft">
+                <input type="file" value="" name="LinkLogo" />
+                @Model.LinkLogo
+                <input type="hidden" value="@Model.LinkLogo" name="HideLinkLogo"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.HasLogo)
+            </td>
+            <td class="paddingleft">
+                @if (Model.HasLogo == 1)
+                {
+                    <input type="checkbox" checked="checked" name="HasLogo" />
+                }
+                else
+                {
+                    <input type="checkbox" name="HasLogo" />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ShowOrder)
+            </td>
+            <td class="paddingleft small">
+                @Html.EditorFor(m => m.ShowOrder)同一类型下，数字越大，越靠前显示
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+
+}

@@ -1,0 +1,98 @@
+﻿@model ZCJ.Model.ArticleInfo
+@{
+    ViewBag.Title = "修改文章信息";
+    ZCJ.Model.SiteManager model = ZCJ.BLL.SiteManagerBLL.GetModel(Model.Author);
+    ViewBag.nickname = model == null ? "" : model.NickName;
+}
+@section Scripts{
+    <script src="~/Areas/Account/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker-zh-CN.js"></script>
+    <script>
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+            $("#CreateDate").datepicker({ dateFormat: "yy-mm-dd" });
+        });
+    </script>
+}
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">@Html.DisplayNameFor(m => m.ClassId)</td>
+            <td class="paddingleft">
+                @Html.DropDownListFor(m => m.ClassId, ZCJ.BLL.ArticleClassBLL.GetAllArticleList(), new { select = Model.ClassId })
+                @Html.ValidationMessageFor(m => m.ClassId)
+                @Html.DisplayNameFor(m => m.AttributionArea)
+                @Html.DropDownListFor(m => m.AttributionArea, ZCJ.BLL.SiteParameterBLL.GetParameterList("AttributionArea"), new { select = Model.AttributionArea })
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">@Html.DisplayNameFor(m => m.Title)</td>
+            <td class="paddingleft">
+                <input type="text" name="Title" value="@Model.Title"/>
+                @Html.ValidationMessageFor(m => m.Title)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">@Html.DisplayNameFor(m => m.ArticleIntroduce)</td>
+            <td class="paddingleft">
+                <input type="text" name="ArticleIntroduce" value="@Model.ArticleIntroduce" />
+                @Html.ValidationMessageFor(m => m.ArticleIntroduce)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">@Html.DisplayNameFor(m => m.Keyword)</td>
+            <td class="paddingleft">
+                <input type="text" name="Keyword" value="@Model.Keyword"/>
+                @Html.ValidationMessageFor(m => m.Keyword)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Author)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="nickname" value="@ViewBag.nickname" disabled="disabled"/>
+                <input type="hidden" name="Author" value="@Model.Author"/>
+                @Html.ValidationMessageFor(m => m.Author)
+                @Html.DisplayNameFor(m => m.ArticleFrom)
+                <input type="text" name="ArticleFrom" value="@Model.ArticleFrom"/>
+                @Html.ValidationMessageFor(m => m.ArticleFrom)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">@Html.DisplayNameFor(m => m.HasImage)</td>
+            <td class="paddingleft">
+                @Html.CheckBox("HasImage", Model.HasImage)
+                加水印 
+                @Html.CheckBox("shuiyin")
+                热点文章
+                @Html.CheckBox("HotFlag", Model.HotFlag)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">@Html.DisplayNameFor(m => m.ArticleContent)
+
+            </td>
+            <td class="paddingleft">
+                <textarea class="ckeditor" name="ArticleContent">@Model.ArticleContent</textarea>
+                @Html.ValidationMessageFor(m => m.ArticleContent)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.CreateDate)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="CreateDate" id="CreateDate" value="@Convert.ToDateTime(Model.CreateDate).ToString("yyyy-MM-dd")"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="hidden" value="@Model.id" name="id" id="id"/>
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

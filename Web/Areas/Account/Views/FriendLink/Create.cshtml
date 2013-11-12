@@ -1,0 +1,60 @@
+﻿@model ZCJ.Model.FriendLink
+@{
+    ViewBag.Title = "添加友情链接";
+}
+
+@using (Html.BeginForm("Create", "FriendLink", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.LinkType)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownListFor(m => m.LinkType, ZCJ.BLL.FriendLinkBLL.GetFriendLinkTypeList())
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.LabelFor(m => m.LinkName)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.LinkName)
+                @Html.ValidationMessageFor(m => m.LinkName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.LabelFor(m => m.LinkUrl)
+            </td>
+            <td class="paddingleft middle">
+                @Html.EditorFor(m => m.LinkUrl)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.LabelFor(m => m.LinkLogo)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.LinkLogo)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.LabelFor(m => m.ShowOrder)
+            </td>
+            <td class="paddingleft small">
+                @Html.EditorFor(m => m.ShowOrder)
+                @Html.ValidationMessageFor(m => m.ShowOrder)
+                同一类型下，数字越大，越靠前显示
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+
+}

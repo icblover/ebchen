@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ZCJ.Model.ColumnNavigation>
+@{
+    ViewBag.Title = "导航栏目列表";
+}
+
+
+<table class="table table-hover table_all">
+    <tr class="info">
+        <td>
+            @Html.DisplayNameFor(m => m.id)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.ColumnName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.ColumnUrl)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.Remark)
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.ColumnName, "Edit", "ColumnNavigation", new { id = item.id }, null)
+            </td>
+            <td class="paddingleft">
+                <a href="http://@item.ColumnUrl" target="_blank">@item.ColumnUrl</a>
+            </td>
+            <td>
+                @item.Remark
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "ColumnNavigation", new { id = item.id }, null) /
+                @Html.ActionLink("删除", "Delete", "ColumnNavigation", new { id = item.id }, null)
+            </td>
+        </tr>
+    }
+
+
+</table>
+

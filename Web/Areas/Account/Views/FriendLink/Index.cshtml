@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ZCJ.Model.FriendLink>
+@{
+    ViewBag.Title = "友情链接列表";
+}
+
+
+<table class="table table-hover table_all">
+    <tr class="info">
+        <td>
+            @Html.DisplayNameFor(m => m.id)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.LinkName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.LinkUrl)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.LinkTypeName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.LinkLogo)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.ShowOrder)
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(@item.LinkName, "Edit", "FriendLink", new { id = item.id }, null)
+            </td>
+            <td class="paddingleft">
+                <a href="http://@item.LinkUrl" target="_blank">@item.LinkUrl</a>
+            </td>
+            <td>
+                @item.LinkTypeName
+            </td>
+            <td>
+                @if (item.LinkLogo != "")
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="checkbox" disabled="disabled" />
+                }
+            </td>
+            <td>
+                @item.ShowOrder
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "FriendLink", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "FriendLink", new { id = item.id }, null)
+            </td>
+        </tr>
+    }
+</table>

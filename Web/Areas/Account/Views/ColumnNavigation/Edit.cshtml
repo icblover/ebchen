@@ -1,0 +1,43 @@
+﻿@model ZCJ.Model.ColumnNavigation
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ColumnName)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.ColumnName" name="ColumnName"/>
+                @Html.ValidationMessageFor(m => m.ColumnName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ColumnUrl)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.ColumnUrl" name="ColumnUrl" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Remark)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.Remark" name="Remark" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+                <input type="hidden" value="@Model.id" name="id"/>
+            </td>
+        </tr>
+    </table>
+}

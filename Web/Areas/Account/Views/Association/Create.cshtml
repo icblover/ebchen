@@ -1,0 +1,49 @@
+﻿@model ZCJ.Model.Association
+@{
+    ViewBag.Title = "添加新协会信息";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.AssociationName)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="AssociationName" />
+                @Html.ValidationMessageFor(m => m.AssociationName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.AssociationUrl)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="AssociationUrl" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.AssociationType)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("AssociationType", ZCJ.BLL.AssociationBLL.GetAssociationType())
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ShowOrder)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="ShowOrder" />
+                数字越大，显示越靠前
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

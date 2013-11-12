@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "添加视频";
+}
+
+
+@using (Html.BeginForm("Create", "Video", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">所属分类
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("ClassId", ZCJ.BLL.VideoClassBLL.GetAllArticleList())
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">视频标题
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Title" id="Title" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">视频简介
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="Introduce" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">关键字
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="Keyword" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">记者
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="Reporter" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">编辑
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Editor" value="@ZCJ.BLL.SiteManagerBLL.GetModel(Convert.ToInt32(Session["userid"])).NickName" disabled="disabled"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">来源
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="VideoFrom" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">视频文件
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="VideoPath" id="VideoPath" /><input type="button" id="validateFileBtn" value="检测文件" />
+                ftp视频放置路径为根目录下/UploadFiles/Video/，检测文件示例:a.wmv
+                <div id="showMsg"></div>
+                <input type="hidden" id="checkValidate" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">内容
+            </td>
+            <td class="paddingleft">
+                <textarea name="Context" class="ckeditor"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">添加时间</td>
+            <td class="paddingleft">
+                <input type="text" name="CreateDate" id="CreateDate" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" id="checkForm" />
+            </td>
+        </tr>
+    </table>
+}
+
+@section Scripts{
+    <script src="~/Areas/Account/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker-zh-CN.js"></script>
+    <script>
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+            $("#CreateDate").datepicker({ dateFormat: "yy-mm-dd" });
+        });
+    </script>
+    <script src="~/Areas/Account/Scripts/ValidateVideo.js"></script>
+}

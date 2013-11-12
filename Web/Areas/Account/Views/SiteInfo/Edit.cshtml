@@ -1,0 +1,80 @@
+﻿@model ZCJ.Model.SiteBaseInfo
+@{
+    ViewBag.Title = "Edit";
+}
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.SiteName)
+            </td>
+            <td class="paddingleft middle">
+                @Html.EditorFor(m => m.SiteName)
+                @Html.ValidationMessageFor(m=>m.SiteName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.SiteKeyWord)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.SiteKeyWord)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.TelNo)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.TelNo)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Email)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.Email)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ZipCode)
+            </td>
+            <td class="paddingleft">
+                @Html.EditorFor(m => m.ZipCode)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Copyright)
+            </td>
+            <td class="paddingleft large">
+                @Html.EditorFor(m => m.Copyright)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Address)
+            </td>
+            <td class="paddingleft middle">
+                @Html.EditorFor(m => m.Address)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.CodeStatistics)
+            </td>
+            <td class="paddingleft large">
+                @Html.TextAreaFor(m => m.CodeStatistics)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+                <input type="hidden" value="@Model.id" name="id" id="id"/>
+            </td>
+        </tr>
+    </table>
+}

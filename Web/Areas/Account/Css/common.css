@@ -1,0 +1,41 @@
+﻿.table_all {
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    width: 98%;
+}
+
+    .table_all td {
+        border-top: 1px solid #dddddd;
+        border-left: 1px solid #dddddd;
+        text-align: center;
+        height: 25px;
+        line-height: 25px;
+        padding-right: 0;
+        padding-bottom: 0;
+    }
+
+    .table_all .paddingleft {
+        padding-left: 15px;
+        text-align: left;
+    }
+
+    .table_all .paddingright {
+        padding-right: 15px;
+        text-align: right;
+    }
+
+    .table_all input, select, textarea {
+        margin-top: 3px;
+    }
+
+    .table_all .small input {
+        width: 50px;
+    }
+
+    .table_all .middle input {
+        width: 320px;
+    }
+
+    .table_all .large input, textarea {
+        width: 500px;
+    }

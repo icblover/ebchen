@@ -1,0 +1,7 @@
+E:\EB\IDAL\bin\Debug\IDAL.dll
+E:\EB\IDAL\bin\Debug\IDAL.pdb
+E:\EB\IDAL\bin\Debug\Model.dll
+E:\EB\IDAL\bin\Debug\Model.pdb
+E:\EB\IDAL\obj\Debug\IDAL.csprojResolveAssemblyReference.cache
+E:\EB\IDAL\obj\Debug\IDAL.dll
+E:\EB\IDAL\obj\Debug\IDAL.pdb

@@ -1,0 +1,117 @@
+﻿@using Webdiyer.WebControls.Mvc
+@using ZCJ.BLL
+@model PagedList<ZCJ.Model.Video>
+@{
+    ViewBag.Title = "Index";
+    string moduleId = ZCJ.DALFactory.DataAccess.CreateManagerRoleDAL().GetModel(Convert.ToInt32(Session["role"])).OperateList;
+}
+
+
+<table class="table table_all">
+    <tr>
+        <td>编号
+        </td>
+        <td>文章标题
+        </td>
+        <td>频道
+        </td>
+        <td>添加时间
+        </td>
+        <td>状态
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (VideoBLL.HasThirdTrail(moduleId, item.VideoState) || VideoBLL.ThirdEndAudit(moduleId, item.VideoState))
+        {<!-- 三审权限 -->
+        <tr>
+            <td>
+                @item.id
+
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.Title ?? "标题为空", "Edit", "Video", new { id = item.id }, null)
+            </td>
+            <td>
+                @item.ClassName
+            </td>
+            <td>
+                @item.CreateDate.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                @item.VideoState
+            </td>
+            <td>
+                @if (VideoBLL.HasSecondTrial(moduleId, item.VideoState))
+                {
+                    @Html.ActionLink("二审", "SecondAudit", "Video", new { id = item.id, powerlist = moduleId, state = item.VideoState }, null)
+                }
+                @if (VideoBLL.HasThirdTrail(moduleId, item.VideoState))
+                {
+                    @Html.ActionLink("三审", "ThirdAudit", "Video", new { id = item.id, powerlist = moduleId, state = item.VideoState }, null)
+                }
+
+                @Html.ActionLink("编辑", "Edit", "Video", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "Video", new { id = item.id }, null)
+            </td>
+        </tr>
+        }
+        else if (VideoBLL.HasSecondTrial(moduleId, item.VideoState) || VideoBLL.SecondEndTrial(moduleId, item.VideoState))
+        { <!-- 二审权限 -->
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.Title ?? "标题为空", "Edit", "Video", new { id = item.id }, null)
+            </td>
+            <td>
+                @item.ClassName
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+                @item.VideoState
+            </td>
+            <td>
+                @if (VideoBLL.HasSecondTrial(moduleId, item.VideoState))
+                {
+                    @Html.ActionLink("二审 ", "SecondAudit", "Video", new { id = item.id, powerlist = moduleId, state = item.VideoState }, null);
+                }
+                @Html.ActionLink("编辑", "Edit", "Video", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "Video", new { id = item.id }, null)
+            </td>
+        </tr>
+        }
+        else if (item.Editor.ToString() == Session["userid"].ToString() && VideoBLL.AuthorAudit(moduleId))
+        {<!-- 一审权限 -->
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.Title ?? "标题为空", "Edit", "Video", new { id = item.id }, null)
+            </td>
+            <td>
+                @item.ClassName
+            </td>
+            <td>
+                @item.CreateDate
+            </td>
+            <td>
+                @item.VideoState
+            </td>
+            <td>--
+                @if (item.FirstAudit == null && item.SecondAudit == null)
+                {
+                    @Html.ActionLink("编辑", "Edit", "Video", new { id = item.id }, null)
+                }
+                &nbsp; @Html.ActionLink("删除", "Delete", "Video", new { id = item.id }, null)
+            </td>
+        </tr>
+        }
+    }
+</table>
+@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex" })

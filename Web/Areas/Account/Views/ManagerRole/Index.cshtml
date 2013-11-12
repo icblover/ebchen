@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ZCJ.Model.ManagerRole>
+@{
+    ViewBag.Title = "角色管理";
+    List<ZCJ.Model.SiteModule> operateNameList = ZCJ.BLL.SiteModuleBLL.GetOperateListItem();
+}
+
+<table class="table table_all table-hover">
+    <tr class="info">
+        <td>
+            @Html.DisplayNameFor(m => m.id)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.name)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.OperateList)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.CreateDate)
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.name, "Edit", "ManagerRole", new { id = item.id }, null)
+            </td>
+            <td class="paddingleft" width="65%">
+                @ZCJ.BLL.ManagerRoleBLL.ConvertOperateIdToName(operateNameList, item.OperateList)
+            </td>
+            <td>
+                @if (item.CreateDate != null)
+                {
+                    @item.CreateDate.Value.ToString("yyyy/MM/dd HH:mm:ss")
+                }
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "ManagerRole", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "ManagerRole", new { id = item.id }, null)
+            </td>
+        </tr>
+    }
+</table>

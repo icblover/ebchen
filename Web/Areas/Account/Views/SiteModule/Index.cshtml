@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ZCJ.Model.SiteModule>
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table table_all table-hover">
+    <tr class="info">
+        <td>编号
+        </td>
+        <td>模块名称
+        </td>
+        <td>模块路径
+        </td>
+        <td>是否开启
+        </td>
+        <td>添加时间
+        </td>
+        <td>备注
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.ModuleName, "Edit", "SiteModule", new { id = item.id }, null)
+            </td>
+            <td class="paddingleft">
+                @item.ModuleUrl
+            </td>
+            <td>
+                @if ((bool)item.IsClosed)
+                {
+                    <input type="checkbox" disabled="disabled" />   
+                }
+                else
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />    
+                }
+            </td>
+            <td>
+                @item.CreateDate.Value.ToString("yyyy/MM/dd HH:mm:ss")
+            </td>
+            <td>
+                @item.remark
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "SiteModule", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "SiteModule", new { id = item.id }, null)
+            </td>
+        </tr>
+                foreach (var sonItem in ZCJ.BLL.SiteModuleBLL.GetSonModuleList(item.id))
+                {
+        <tr>
+            <td>
+                @sonItem.id
+            </td>
+            <td class="paddingleft">&nbsp;&nbsp;└ @Html.ActionLink(sonItem.ModuleName, "Edit", "SiteModule", new { id = sonItem.id }, null)
+            </td>
+            <td class="paddingleft">
+                @sonItem.ModuleUrl
+            </td>
+            <td>
+                @if ((bool)sonItem.IsClosed)
+                {
+                    <input type="checkbox" disabled="disabled" />   
+                }
+                else
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />    
+                }
+            </td>
+            <td>
+                @sonItem.CreateDate.Value.ToString("yyyy/MM/dd HH:mm:ss")
+            </td>
+            <td>
+                @sonItem.remark
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "SiteModule", new { id = sonItem.id }, null) / @Html.ActionLink("删除", "Delete", "SiteModule", new { id = sonItem.id }, null)
+            </td>
+        </tr>
+                }
+    }
+
+
+</table>

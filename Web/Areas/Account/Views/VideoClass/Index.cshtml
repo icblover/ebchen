@@ -1,0 +1,84 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<ZCJ.Model.VideoClass>
+@{
+    ViewBag.Title = "视频类型列表";
+}
+
+<table class="table table-hover table_all">
+    <tr class="info">
+        <td>编号
+        </td>
+        <td>栏目名称
+        </td>
+        <td>所属分类
+        </td>
+        <td>开启
+        </td>
+        <td>备注
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.ClassName, "Edit", "VideoClass", new { id = item.id }, null)
+            </td>
+            <td>根分类
+            </td>
+            <td>
+                @if (item.IsDelete)
+                {
+                    <input type="checkbox" disabled="disabled" />    
+                }
+                else
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+            </td>
+            <td>
+                @item.Remark
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "VideoClass", new { id = item.id }, null) /
+                @Html.ActionLink("删除", "Delete", "VideoClass", new { id = item.id }, null)
+            </td>
+        </tr>
+                foreach (var sonItem in ZCJ.BLL.VideoClassBLL.GetSonClass(item.id))
+                {
+        <tr>
+            <td>
+                @sonItem.id
+            </td>
+            <td class="paddingleft">└@Html.ActionLink(sonItem.ClassName, "Edit", "VideoClass", new { id = sonItem.id }, null)
+            </td>
+            <td>
+                @item.ClassName
+            </td>
+            <td>
+                @if (sonItem.IsDelete)
+                {
+                    <input type="checkbox" disabled="disabled" />    
+                }
+                else
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+            </td>
+            <td>
+                @sonItem.Remark
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "VideoClass", new { id = sonItem.id }, null) /
+                    @Html.ActionLink("删除", "Delete", "VideoClass", new { id = sonItem.id }, null)
+            </td>
+        </tr>
+                }
+    }
+</table>
+@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id" })

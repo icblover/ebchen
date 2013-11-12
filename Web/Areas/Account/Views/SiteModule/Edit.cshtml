@@ -1,0 +1,58 @@
+﻿@model ZCJ.Model.SiteModule
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    
+    <table class="table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ModuleName)
+            </td>
+            <td class="paddingleft">
+                <input id="ModuleName" type="text" name="ModuleName" value="@Model.ModuleName" />
+                @Html.ValidationMessageFor(m => m.ModuleName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ModuleUrl)
+            </td>
+            <td class="paddingleft">
+                <input id="ModuleUrl" type="text" name="ModuleUrl"  value="@Model.ModuleUrl"/></td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ParentId)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("ParentId", ZCJ.BLL.SiteModuleBLL.GetSelectListItem(), new { select = Model.id.ToString() })
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.IsClosed)
+            </td>
+            <td class="paddingleft">
+                @Html.CheckBox("IsClosed", Model.IsClosed != null && !(bool)Model.IsClosed)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.remark)
+            </td>
+            <td class="paddingleft">
+                <textarea id="remark" cols="20" rows="2" name="remark">@Model.remark</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+                <input type="hidden" value="@Model.id" name="id" id="id"/>
+            </td>
+        </tr>
+    </table>
+
+}

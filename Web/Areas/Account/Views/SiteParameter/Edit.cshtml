@@ -1,0 +1,40 @@
+﻿@model ZCJ.Model.SiteParameter
+@{
+    ViewBag.Title = "修改配置信息";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ParameterName)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.ParameterName" name="ParamterName" />
+                @Html.ValidationMessageFor(m => m.ParameterName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ParameterType)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.ParameterType" name="ParameterType" />
+                @Html.ValidationMessageFor(m => m.ParameterType)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">备注</td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.Remark" name="Remark" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+                <input type="hidden" value="@Model.id"  name="id"/>
+            </td>
+        </tr>
+    </table>
+}

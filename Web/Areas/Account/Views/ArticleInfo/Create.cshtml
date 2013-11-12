@@ -1,0 +1,105 @@
+﻿@model ZCJ.Model.ArticleInfo
+@using ZCJ.BLL;
+@{
+    ViewBag.Title = "添加文章信息";
+}
+@section Scripts{
+    <script src="~/Areas/Account/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker-zh-CN.js"></script>
+    <script>
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+            $("#CreateDate").datepicker({ dateFormat: "yy-mm-dd" });
+        });
+    </script>
+}
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td  class="paddingright">
+                @Html.DisplayNameFor(m => m.ClassId)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("ClassId", ArticleClassBLL.GetAllArticleList())
+                @Html.ValidationMessageFor(m => m.ClassId)
+                @Html.DisplayNameFor(m => m.AttributionArea)
+                @Html.DropDownList("AttributionArea", SiteParameterBLL.GetParameterList("AttributionArea"))
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Title)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Title" />
+                @Html.ValidationMessageFor(m => m.Title)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ArticleIntroduce)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="ArticleIntroduce" />
+                @Html.ValidationMessageFor(m => m.ArticleIntroduce)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Keyword)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Keyword" />
+                @Html.ValidationMessageFor(m => m.Keyword)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Author)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Author"  value="@SiteManagerBLL.GetModel(Convert.ToInt32(Session["userid"])).NickName" disabled="disabled"/>
+                @Html.ValidationMessageFor(m => m.Author)
+                @Html.DisplayNameFor(m => m.ArticleFrom)
+                <input type="text" name="ArticleFrom" />
+                @Html.ValidationMessageFor(m => m.ArticleFrom)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.HasImage)
+            </td>
+            <td class="paddingleft">
+                @Html.CheckBox("HasImage", false)
+                加水印 
+                @Html.CheckBox("shuiyin")
+                @Html.DisplayNameFor(m => m.HotFlag)
+                @Html.CheckBox("HotFlag", false)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ArticleContent)
+            </td>
+            <td class="paddingleft">
+                <textarea class="ckeditor" name="ArticleContent"></textarea>
+                @Html.ValidationMessageFor(m => m.ArticleContent)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.CreateDate)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="CreateDate" id="CreateDate" value="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

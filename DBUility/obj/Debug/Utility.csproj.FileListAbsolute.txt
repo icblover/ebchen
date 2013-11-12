@@ -1,0 +1,7 @@
+E:\EB\DBUility\bin\Debug\DBUility.dll
+E:\EB\DBUility\bin\Debug\DBUility.pdb
+E:\EB\DBUility\bin\Debug\Model.dll
+E:\EB\DBUility\bin\Debug\Model.pdb
+E:\EB\DBUility\obj\Debug\Utility.csprojResolveAssemblyReference.cache
+E:\EB\DBUility\obj\Debug\DBUility.dll
+E:\EB\DBUility\obj\Debug\DBUility.pdb

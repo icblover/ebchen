@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "添加新栏目";
+}
+
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">分类名称</td>
+            <td class="paddingleft">
+                <input type="text" value="" name="ClassName" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">所属分类
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("ParentId", ZCJ.BLL.ArticleClassBLL.GetParentClassSelectItem())
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">启用
+            </td>
+            <td class="paddingleft">
+                <input type="checkbox" name="IsDelete" checked="checked" /><input type="hidden" name="IsDelete" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">备注
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="remark" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

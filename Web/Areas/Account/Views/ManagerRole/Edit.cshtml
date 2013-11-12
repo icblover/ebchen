@@ -1,0 +1,65 @@
+﻿@model ZCJ.Model.ManagerRole
+@{
+    ViewBag.Title = "修改角色信息";
+    IEnumerable<ZCJ.Model.SiteModule> list = ZCJ.BLL.SiteModuleBLL.GetOperateListItem();
+    List<string> HasOperateIdList = Model.OperateList.Split(',').ToList();
+}
+
+@section Scripts{
+    <script src="~/Areas/Account/Scripts/MngRoleSetOperateList.js"></script>
+}
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.name)
+            </td>
+            <td class="paddingleft">
+                <input id="name" type="text" name="name" value="@Model.name" />
+                @Html.ValidationMessageFor(m => m.name)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.OperateList)
+            </td>
+            <td class="paddingleft">
+                @foreach (var item in from p in list where p.ParentId == 0 select p)
+                {
+                    if (HasOperateIdList.Contains(item.id.ToString()))
+                    {
+                        <input type="checkbox" value="@item.id" class="operate" onclick="setCasCase(this)" checked="checked"/>@item.ModuleName
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="@item.id" class="operate" onclick="setCasCase(this)"/>@item.ModuleName
+                    }
+                    if (item.ParentId == 0)
+                    {
+                        foreach (var sonItem in from p in list where p.ParentId == item.id select p)
+                        {
+                            if (HasOperateIdList.Contains(sonItem.id.ToString()))
+                            {
+                                 <input type="checkbox" value="@sonItem.ParentId-@sonItem.id" class="operate" onclick="setCasCase(this)" checked="checked"/>@sonItem.ModuleName
+                            }
+                            else
+                            {
+                                 <input type="checkbox" value="@sonItem.ParentId-@sonItem.id" class="operate" onclick="setCasCase(this)"/>@sonItem.ModuleName
+                            }
+                        }
+                    }
+                    <br />
+                }
+                <input type="hidden" value="" id="OperateList" name="OperateList" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" onclick="setCheckValueList()" />
+                <input type="hidden" value="@Model.id" name="id" id="id"/>
+            </td>
+        </tr>
+    </table>
+
+}

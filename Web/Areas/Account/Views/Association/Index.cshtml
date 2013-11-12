@@ -1,0 +1,71 @@
+﻿@using Webdiyer.WebControls.Mvc
+@model PagedList<ZCJ.Model.Association>
+@{
+    ViewBag.Title = "协会列表";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all" style="margin: 10px 0px; padding-top: 10px;">
+        <tr>
+            <td>学校名称</td>
+            <td>
+                <input type="text" name="keyword" />
+            </td>
+        </tr>
+        <tr>
+            <td>学校类型</td>
+            <td>
+                @Html.DropDownList("AssociationType", ZCJ.BLL.AssociationBLL.GetAssociationType())
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="查询" />
+            </td>
+        </tr>
+    </table>    
+}
+
+
+<table class="table table_all">
+    <tr class="info">
+        <td>
+            @Html.DisplayNameFor(m => m.id)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.AssociationName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.AssociationUrl)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.AssociationTypeName)
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.AssociationName, "Edit", "Association", new { id = item.id }, null)
+            </td>
+            <td class="paddingleft">
+                <a href="http://@item.AssociationUrl">@item.AssociationUrl</a>
+            </td>
+            <td class="paddingleft">
+                @item.AssociationTypeName
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "Association", new { id = item.id }, null) /
+                @Html.ActionLink("删除", "Delete", "Association", new { id = item.id }, null)
+            </td>
+        </tr>
+    }
+</table>
+@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "id" })

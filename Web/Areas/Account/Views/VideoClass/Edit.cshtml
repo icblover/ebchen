@@ -1,0 +1,42 @@
+﻿@model ZCJ.Model.VideoClass
+@{
+    ViewBag.Title = "修改栏目信息";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">分类名称</td>
+            <td class="paddingleft">
+                <input type="text" name="ClassName" value="@Model.ClassName"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">所属分类
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("ParentId", ZCJ.BLL.VideoClassBLL.GetParentClassSelectItem(), new { select = Model.ParentId })
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">启用
+            </td>
+            <td class="paddingleft">
+                @Html.CheckBox("IsDelete", !Model.IsDelete)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">备注
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="remark" value="@Model.Remark" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

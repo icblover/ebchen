@@ -1,0 +1,43 @@
+﻿@model ZCJ.Model.SiteParameter
+@{
+    ViewBag.Title = "添加配置参数";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ParameterName)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="ParameterName" />
+                @Html.ValidationMessageFor(m => m.ParameterName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ParameterType)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="ParameterType" />
+                @Html.ValidationMessageFor(m => m.ParameterType)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Remark)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" name="Remark" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

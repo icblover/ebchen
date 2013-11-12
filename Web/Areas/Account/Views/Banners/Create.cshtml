@@ -1,0 +1,48 @@
+﻿@model ZCJ.Model.Banners
+@{
+    ViewBag.Title = "添加通栏";
+}
+
+
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.Loacation)
+            </td>
+            <td>
+                @Html.DropDownList("AssociationType", ZCJ.BLL.AssociationBLL.GetAssociationType())
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.ImagePath)
+            </td>
+            <td>
+                <input type="text" name="AssociationUrl" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.ImageUrl)
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(m => m.ImageAlt)
+            </td>
+            <td>
+                <input type="text" value="" name="ShowOrder" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" />
+            </td>
+        </tr>
+    </table>
+}

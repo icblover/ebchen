@@ -1,0 +1,56 @@
+﻿@using ZCJ.Model;
+@model IEnumerable<ZCJ.Model.SiteManager>
+@{
+    ViewBag.Title = "管理员列表";
+}
+
+<table class="table table_all table-hover">
+    <tr class="info">
+        <td>
+            @Html.DisplayNameFor(m => m.id)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.UserName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.NickName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.Is_Deleted)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.Role)
+        </td>
+        <td>操作
+        </td>
+    </tr>
+    @foreach (SiteManager item in Model)
+    {
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td>
+                @Html.ActionLink(item.UserName, "Edit", "SiteManager", new { id = item.id }, null) 
+            </td>
+            <td>
+                @item.NickName
+            </td>
+            <td>
+                @if (!item.Is_Deleted)
+                {
+                    <input type="checkbox" checked="checked" disabled="disabled" />
+                }
+                else
+                {
+                    <input type="checkbox" disabled="disabled" />
+                }
+            </td>
+            <td>@item.Role
+            </td>
+            <td>
+                @Html.ActionLink("编辑", "Edit", "SiteManager", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "SiteManager", new { id = item.id }, null)
+            </td>
+        </tr>
+    }
+</table>

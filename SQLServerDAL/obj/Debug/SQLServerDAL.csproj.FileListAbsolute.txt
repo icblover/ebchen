@@ -1,0 +1,11 @@
+E:\EB\SQLServerDAL\bin\Debug\ZCJ.SQLServerDAL.dll
+E:\EB\SQLServerDAL\bin\Debug\ZCJ.SQLServerDAL.pdb
+E:\EB\SQLServerDAL\bin\Debug\DBUility.dll
+E:\EB\SQLServerDAL\bin\Debug\IDAL.dll
+E:\EB\SQLServerDAL\bin\Debug\Model.dll
+E:\EB\SQLServerDAL\bin\Debug\DBUility.pdb
+E:\EB\SQLServerDAL\bin\Debug\IDAL.pdb
+E:\EB\SQLServerDAL\bin\Debug\Model.pdb
+E:\EB\SQLServerDAL\obj\Debug\SQLServerDAL.csprojResolveAssemblyReference.cache
+E:\EB\SQLServerDAL\obj\Debug\ZCJ.SQLServerDAL.dll
+E:\EB\SQLServerDAL\obj\Debug\ZCJ.SQLServerDAL.pdb

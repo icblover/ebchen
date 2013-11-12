@@ -1,0 +1,130 @@
+﻿@model ZCJ.Model.Video
+@{
+    ViewBag.Title = "修改视频信息";
+    ZCJ.Model.SiteManager siteManager = ZCJ.BLL.SiteManagerBLL.GetModel(Convert.ToInt32(Model.Editor));
+    if (siteManager != null)
+    {
+        ViewBag.showEditor = siteManager.NickName;
+    }
+    else
+    {
+        ViewBag.showEditor = "";
+    }
+}
+
+@using (Html.BeginForm("Edit", "Video", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.ClassId)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("ClassId", ZCJ.BLL.VideoClassBLL.GetAllArticleList(), new { select = Model.ClassId })
+                @Html.ValidationMessageFor(m => m.ClassId)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Title)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Title" id="Title" value="@Model.Title"/>
+                @Html.ValidationMessageFor(m => m.Title)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Introduce)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="Introduce" value="@Model.Introduce"/>
+                @Html.ValidationMessageFor(m => m.Introduce)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Keyword)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.Keyword" name="Keyword" />
+                @Html.ValidationMessageFor(m => m.Keyword)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Reporter)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.Reporter" name="Reporter" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Editor)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="showEditor" value="@ViewBag.showEditor" disabled="disabled"/>
+                <input type="hidden" id="Editor" name="Editor" value="@Model.Editor"/>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.VideoFrom)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="@Model.VideoFrom" name="VideoFrom" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.VideoPath)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="VideoPath" id="VideoPath" value="@Model.VideoPath.Substring(Model.VideoPath.LastIndexOf("/") + 1)"/>
+                <input type="hidden" name="oldVideoPath" id="oldVideoPath" value="@Model.VideoPath.Substring(Model.VideoPath.LastIndexOf("/") + 1)"/>
+                <input type="hidden" name="oldVideoImage" id="oldVideoImage" value="@Model.VideoImage"/>
+                <input type="button" id="validateFileBtn" value="检测文件" />
+                ftp视频放置路径为根目录下/UploadFiles/Video/，示例:a.wmv 
+                <div id="showMsg"></div>
+                <input type="hidden" id="checkValidate" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Context)
+            </td>
+            <td class="paddingleft">
+                <textarea name="Context" class="ckeditor">@Model.Context</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.CreateDate)
+            </td>
+            <td class="paddingleft">
+                <input type="text" name="CreateDate" id="CreateDate" value="@Model.CreateDate.ToString("yyyy-MM-dd")"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" id="checkForm" />
+                <input type="hidden" value="@Model.id" name="id" id="id" />
+                <input type="hidden" value="1" id="hasVideo" />
+            </td>
+        </tr>
+    </table>
+}
+
+@section Scripts{
+    <script src="~/Areas/Account/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker.js"></script>
+    <script src="~/Areas/Account/Css/Jquery UI/jquery.ui.datepicker-zh-CN.js"></script>
+    <script>
+        $(function () {
+            $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+            $("#CreateDate").datepicker({ dateFormat: "yy-mm-dd" });
+        });
+    </script>
+    <script src="~/Areas/Account/Scripts/ValidateVideo.js"></script>
+}

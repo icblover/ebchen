@@ -1,0 +1,219 @@
+﻿@{
+    IEnumerable<ZCJ.Model.SiteModule> SiteModuleList = ViewBag.MenuList as IEnumerable<ZCJ.Model.SiteModule>;
+    if (Session["role"] == null || Session["userid"] == null)
+    {
+        Response.Redirect("/Account/Main/Login");
+    }
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="@Url.Content("~/Areas/Account/css/bootstrap/css/bootstrap.css")" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/Areas/Account/css/Common.css")" rel="stylesheet" media="screen">
+
+    <link href="@Url.Content("~/Areas/Account/css/Jquery UI/jquery.ui.all.css")" rel="stylesheet" media="screen">
+    <link href="@Url.Content("~/Areas/Account/css/Jquery UI/demos.css")" rel="stylesheet" media="screen">
+
+    <script src="@Url.Content("~/Areas/Account/Scripts/time.js")"></script>
+
+    <script src="@Url.Content("~/Areas/Account/Css/Jquery UI/jquery-1.9.1.js")"></script>
+    <script src="@Url.Content("~/Areas/Account/css/bootstrap/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Areas/Account/scripts/jquery.ui.core.js")"></script>
+    <script src="@Url.Content("~/Areas/Account/scripts/jquery.ui.widget.js")"></script>
+    <script src="@Url.Content("~/Areas/Account/scripts/jquery.ui.accordion.js")"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            var icons = {
+                header: "ui-icon-circle-arrow-e",
+                activeHeader: "ui-icon-circle-arrow-s"
+            };
+            $("#accordionlist").accordion({
+                heightStyle: "content"
+            });
+            $("#accordionlist").accordion("option", "icons", null);
+        });
+    </script>
+    @RenderSection("Scripts", false)
+
+</head>
+
+<body>
+    <table width="100%" height="100%">
+        <tr cellspacing="0" cellpaddding="0" style="height: 125px;">
+            <td colspan="3">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td height="57" background="@Url.Content("~/Areas/Account/images/main_03.gif")" >
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="378" height="57" background="@Url.Content("~/Areas/Account/images/main_01.gif")">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td width="281" valign="bottom">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="33" height="27">
+                                                    <img src="@Url.Content("~/Areas/Account/images/main_05.gif")" width="33" height="27" /></td>
+                                                <td width="248" background="@Url.Content("~/Areas/Account/images/main_06.gif")">
+                                                    <table width="225" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td height="17">
+                                                                <div align="right">
+                                                                    <img src="@Url.Content("~/Areas/Account/images/pass.gif")" width="69" height="17" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div align="right">
+                                                                    <img src="@Url.Content("~/Areas/Account/images/user.gif")" width="69" height="17" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div align="right">
+                                                                    <img src="@Url.Content("~/Areas/Account/images/quit.gif")" width="69" height="17" />
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="40" background="@Url.Content("~/Areas/Account/images/main_10.gif")">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="194" height="40" background="@Url.Content("~/Areas/Account/images/main_07.gif")">&nbsp;</td>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="21">
+                                                    <img src="@Url.Content("~/Areas/Account/images/main_13.gif")" width="19" height="14" /></td>
+                                                <td width="35" class="STYLE7">
+                                                    <div align="center" style="cursor: pointer" onclick="javascript:location.href='/Account/Siteinfo/index';">首页</div>
+                                                </td>
+                                                <td width="21" class="STYLE7">
+                                                    <img src="@Url.Content("~/Areas/Account/images/main_15.gif")" width="19" height="14" /></td>
+                                                <td width="35" class="STYLE7">
+                                                    <div align="center" style="cursor: pointer" onclick="javascript:history.go(-1);">后退</div>
+                                                </td>
+                                                <td width="21" class="STYLE7">
+                                                    <img src="@Url.Content("~/Areas/Account/images/main_17.gif")" width="19" height="14" /></td>
+                                                <td width="35" class="STYLE7">
+                                                    <div align="center" style="cursor: pointer" onclick="javascript:history.go(1);">前进</div>
+                                                </td>
+                                                <td width="21" class="STYLE7">
+                                                    <img src="@Url.Content("~/Areas/Account/images/main_19.gif")" width="19" height="14" /></td>
+                                                <td width="35" class="STYLE7">
+                                                    <div align="center" style="cursor: pointer" onclick="javascript:history.reload();">刷新</div>
+                                                </td>
+                                                <td width="21" class="STYLE7">
+                                                    <img src="@Url.Content("~/Areas/Account/images/main_21.gif")" width="19" height="14" /></td>
+                                                <td width="35" class="STYLE7">
+                                                    <div align="center">帮助</div>
+                                                </td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="248" background="@Url.Content("~/Areas/Account/images/main_11.gif")">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="16%"><span class="STYLE5"></span></td>
+                                                <td width="75%">
+                                                    <div class="span3"><span id="clock" class="STYLE7"></span></div>
+                                                </td>
+                                                <td width="9%">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="30" background="@Url.Content("~/Areas/Account/images/main_31.gif")">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td width="8" height="30">
+                                        <img src="@Url.Content("~/Areas/Account/images/main_28.gif")" width="8" height="30" /></td>
+                                    <td width="147" background="@Url.Content("~/Areas/Account/images/main_29.gif")">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td width="24%">&nbsp;</td>
+                                                <td width="43%" height="20" valign="bottom" class="STYLE1">管理菜单</td>
+                                                <td width="33%">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="39">
+                                        <img src="@Url.Content("~/Areas/Account/images/main_30.gif")" width="39" height="30" /></td>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td height="20" valign="bottom"><span class="STYLE1">当前登录用户：@Session["nickname"].ToString() &nbsp;用户角色：管理员</span></td>
+                                                <td valign="bottom" class="STYLE1">
+                                                    <div align="right">
+                                                        <img src="@Url.Content("~/Areas/Account/images/sj.gif")" width="6" height="7" />
+                                                        IP：@(HttpContext.Current.Request.UserHostAddress)       &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                                                        <img src="@Url.Content("~/Areas/Account/images/sj.gif")" width="6" height="7" />
+                                                        &nbsp;单位：浙江职成教网
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="17">
+                                        <img src="@Url.Content("~/Areas/Account/images/main_32.gif")" width="17" height="30" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr cellspacing="0" cellpaddding="0">
+            <td class="TDleft">
+                <div class="Tleft">
+                    <div id="accordionlist">
+                        @foreach (var siteModule in (IEnumerable<ZCJ.Model.SiteModule>)ZCJ.BLL.SiteModuleBLL.GetAuthorityParentModuleList(Convert.ToInt32(Session["role"])))
+                        {
+                            <h2>@siteModule.ModuleName</h2>
+                            <div>
+                                @foreach (var SonModule in (IEnumerable<ZCJ.Model.SiteModule>)ZCJ.BLL.SiteModuleBLL.GetSonModuleList(siteModule.id))
+                                {
+                                    <p>
+                                        <a href="@Url.Content(SonModule.ModuleUrl == "" ? "./" : SonModule.ModuleUrl)">@SonModule.ModuleName</a>
+                                    </p>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </td>
+            <td class="TDright">
+                @RenderBody()
+            </td>
+            <td class="tdregihtborder">&nbsp;</td>
+        </tr>
+        <tr style="height: 10px;">
+            <td colspan="3">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td background="@Url.Content("~/Areas/Account/images/main_71.gif")" style="line-height: 11px; table-layout: fixed" width="165">&nbsp;</td>
+                        <td background="@Url.Content("~/Areas/Account/images/main_72.gif")" style="line-height: 11px; table-layout: fixed">&nbsp;</td>
+                        <td background="@Url.Content("~/Areas/Account/images/main_74.gif")" style="line-height: 11px; table-layout: fixed" width="17">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

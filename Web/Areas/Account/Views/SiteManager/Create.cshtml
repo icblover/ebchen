@@ -1,0 +1,66 @@
+﻿@model ZCJ.Model.SiteManager
+@{
+    ViewBag.Title = "添加管理员";
+}
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.UserName)
+            </td>
+            <td class="paddingleft">
+                <input id="UserName" type="text" name="UserName" />
+                @Html.ValidationMessageFor(m => m.UserName)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.PassWord)
+            </td>
+            <td class="paddingleft">
+                <input id="PassWord" type="text" name="PassWord" />
+                @Html.ValidationMessageFor(m => m.PassWord)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.RePassWord)
+            </td>
+            <td class="paddingleft">
+                <input id="RePassWord" type="text" name="RePassWord" />
+                @Html.ValidationMessageFor(m => m.RePassWord)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.NickName)
+            </td>
+            <td class="paddingleft">
+                <input type="text" value="" id="NickName" name="NickName" />
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Role)
+            </td>
+            <td class="paddingleft">
+                @Html.DropDownList("Role", ZCJ.BLL.ManagerRoleBLL.GetManagerRoleList())
+                @Html.ValidationMessageFor(m => m.Role)
+            </td>
+        </tr>
+        <tr>
+            <td class="paddingright">
+                @Html.DisplayNameFor(m => m.Is_Deleted)
+            </td>
+            <td class="paddingleft">
+                <input type="checkbox" checked="checked" name="Is_Deleted" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="保存" /></td>
+        </tr>
+    </table>
+}

@@ -1,0 +1,169 @@
+﻿@using ZCJ.BLL;
+@using Webdiyer.WebControls.Mvc
+
+@model PagedList<ZCJ.Model.ArticleInfo>
+
+@{
+    ViewBag.Title = "Index";
+    string moduleId = ZCJ.DALFactory.DataAccess.CreateManagerRoleDAL().GetModel(Convert.ToInt32(Session["role"])).OperateList;
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <table class="table table_all">
+        <tr>
+            <td>所属频道</td>
+            <td>
+                @Html.DropDownList("ClassId", ArticleClassBLL.GetAllArticleList())
+            </td>
+            <td>关键字</td>
+            <td>
+                <input type="text" name="keyword" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <input type="submit" value="查询" />
+            </td>
+        </tr>
+    </table>    
+}
+
+
+<table class="table table-hover table_all">
+    <tr class="info">
+        <td>
+            @Html.DisplayNameFor(m => m.id)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.Title)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.ArticleClassName)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.HasImage)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.HotFlag)
+        </td>
+        <td>
+            @Html.DisplayNameFor(m => m.CreateDate)
+        </td>
+        <td>状态
+        </td>
+        <td>操作
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (ArticleInfoBLL.HasThirdTrail(moduleId, item.ArticleSatate) || ArticleInfoBLL.ThirdEndAudit(moduleId, item.ArticleSatate))
+        {<!-- 三审权限 -->
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.Title ?? "标题为空", "Edit", "ArticleInfo", new { id = item.id }, null)
+            </td>
+            <td>
+                @item.ArticleClassName
+            </td>
+            <td>
+                @Html.CheckBox("HasImage", item.HasImage, new { disabled = "disabled" })
+            </td>
+            <td>
+                @Html.CheckBox("HotFlag", item.HotFlag, new { disabled = "disabled" })
+            </td>
+            <td>
+                @item.CreateDate.Value.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                @item.ArticleSatate
+            </td>
+            <td>
+                @if (ArticleInfoBLL.HasSecondTrial(moduleId, item.ArticleSatate))
+                {
+                    @Html.ActionLink("二审", "SecondAudit", "ArticleInfo", new { id = item.id, powerlist = moduleId, state = item.ArticleSatate }, null)
+                }
+                @if (ArticleInfoBLL.HasThirdTrail(moduleId, item.ArticleSatate))
+                {
+                    @Html.ActionLink("三审", "ThirdAudit", "ArticleInfo", new { id = item.id, powerlist = moduleId, state = item.ArticleSatate }, null)
+                }
+
+                @Html.ActionLink("编辑", "Edit", "ArticleInfo", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "ArticleInfo", new { id = item.id }, null)
+            </td>
+        </tr>
+        }
+        else if (ArticleInfoBLL.HasSecondTrial(moduleId, item.ArticleSatate) || ArticleInfoBLL.SecondEndTrial(moduleId, item.ArticleSatate))
+        { <!-- 二审权限 -->
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td  class="paddingleft">
+                @Html.ActionLink(item.Title ?? "标题为空", "Edit", "ArticleInfo", new { id = item.id }, null)
+            </td>
+            <td>
+                @item.ArticleClassName
+            </td>
+            <td>
+                @Html.CheckBox("HasImage", item.HasImage, new { disabled = "disabled" })
+            </td>
+            <td>
+                @Html.CheckBox("HotFlag", item.HotFlag, new { disabled = "disabled" })
+            </td>
+            <td>
+                @item.CreateDate.Value.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                @item.ArticleSatate
+            </td>
+            <td>
+                @if (ArticleInfoBLL.HasSecondTrial(moduleId, item.ArticleSatate))
+                {
+                    @Html.ActionLink("二审 ", "SecondAudit", "ArticleInfo", new { id = item.id, powerlist = moduleId, state = item.ArticleSatate }, null);
+                }
+                @Html.ActionLink("编辑", "Edit", "ArticleInfo", new { id = item.id }, null) / @Html.ActionLink("删除", "Delete", "ArticleInfo", new { id = item.id }, null)
+            </td>
+        </tr>
+        }
+        else if (item.Author == Session["userid"].ToString() && ArticleInfoBLL.AuthorAudit(moduleId))
+        {<!-- 一审权限 -->
+        <tr>
+            <td>
+                @item.id
+            </td>
+            <td class="paddingleft">
+                @Html.ActionLink(item.Title ?? "标题为空", "Edit", "ArticleInfo", new { id = item.id }, null)
+            </td>
+            <td>
+                @item.ArticleClassName
+            </td>
+            <td>
+                @Html.CheckBox("HasImage", item.HasImage, new { disabled = "disabled" })
+            </td>
+            <td>
+                @Html.CheckBox("HotFlag", item.HotFlag, new { disabled = "disabled" })
+            </td>
+            <td>
+                @item.CreateDate.Value.ToString("yyyy-MM-dd")
+            </td>
+            <td>
+                @item.ArticleSatate
+            </td>
+            <td>
+                @if (item.FirstAudit == null && item.SecondAudit == null)
+                {
+                    @Html.ActionLink("编辑", "Edit", "ArticleInfo", new { id = item.id }, null)
+                }
+                &nbsp; @Html.ActionLink("删除", "Delete", "ArticleInfo", new { id = item.id }, null)
+            </td>
+        </tr>
+        }
+    }
+</table>
+@Html.Pager(Model, new PagerOptions { PageIndexParameterName = "pageIndex" })

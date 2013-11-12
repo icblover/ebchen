@@ -1,0 +1,14 @@
+E:\EB\BLL\bin\Debug\BLL.dll
+E:\EB\BLL\bin\Debug\BLL.pdb
+E:\EB\BLL\bin\Debug\DALFactory.dll
+E:\EB\BLL\bin\Debug\DBUility.dll
+E:\EB\BLL\bin\Debug\IDAL.dll
+E:\EB\BLL\bin\Debug\Model.dll
+E:\EB\BLL\bin\Debug\MvcPager.dll
+E:\EB\BLL\bin\Debug\DALFactory.pdb
+E:\EB\BLL\bin\Debug\DBUility.pdb
+E:\EB\BLL\bin\Debug\IDAL.pdb
+E:\EB\BLL\bin\Debug\Model.pdb
+E:\EB\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\EB\BLL\obj\Debug\BLL.dll
+E:\EB\BLL\obj\Debug\BLL.pdb
